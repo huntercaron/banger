@@ -2,6 +2,7 @@
   "name": "banger",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://huntercaron.com/banger",
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "react-scripts": "1.0.10"
