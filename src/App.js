@@ -82,8 +82,8 @@ class App extends Component {
         let buffer = this.buffer;
 
         let sound = new Sound(this.context, buffer.getSoundByIndex(id));
-        this.loop.addSound(sound, context.currentTime);
-        console.log(this.loop);
+        //this.loop.addSound(sound, context.currentTime);
+        //console.log(this.loop);
         //console.log(context.currentTime)
 
         sound.play();
