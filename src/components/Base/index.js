@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    background-color: none;
+    background-color: transparent;
 
     h1 {
       font-size: 1.3rem;
