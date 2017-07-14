@@ -8,6 +8,28 @@ const Wrapper = styled.div`
       font-size: 1.3rem;
       color: pink;
     }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 15px; 
+      width: 3px; 
+      background: white;  
+    }
+
+    .slider:focus {
+      outline: none;
+    }
+
+    .slider:hover {
+      cursor: pointer;
+    }
+`
+
+const Slider = styled.input`
+  -webkit-appearance: none;
+  background: white;
+  height: 3px;
+  }
 `
 
 class RateSlider extends Component {
@@ -24,7 +46,7 @@ class RateSlider extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-              <input onChange={this.handleRateChange} type="range" id="range" min="0.1" max="4" step="0.01" defaultValue="1"></input>
+              <Slider onChange={this.handleRateChange} className="slider" type="range" id="range" min="0.1" max="4" step="0.01" defaultValue="1"/>
           </Wrapper>
       )
     }
