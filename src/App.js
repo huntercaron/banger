@@ -28,6 +28,7 @@ class App extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.playSound = this.playSound.bind(this);
         this.playTime = this.playTime.bind(this);
+        this.handleRate = this.handleRate.bind(this);
     }
 
 
@@ -45,7 +46,7 @@ class App extends Component {
         let context = this.context;
         let buffer = this.buffer;
 
-        let sound = new Sound(this.context, buffer.getSoundByIndex(id), 1);
+        let sound = new Sound(this.context, buffer.getSoundByIndex(id), this.state.rate);
         window.setTimeout(function() {
           console.log(sound.calcDuration());
         }, 200)
@@ -55,6 +56,13 @@ class App extends Component {
         //console.log(context.currentTime)
 
         sound.play();
+    }
+
+    handleRate(rate) {
+      this.setState({
+        rate: rate
+      });
+      console.log(rate);
     }
 
     handleKeyPress(e) {
@@ -99,7 +107,7 @@ class App extends Component {
         <div className="App-header">
           <h2>ZUCCBOI</h2>
           <Track />
-          <RateSlider />
+          <RateSlider onRateChange={this.handleRate}/>
         </div>
 
 
