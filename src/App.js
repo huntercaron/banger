@@ -6,7 +6,8 @@ import Buffer from './helpers/buffer';
 import Loop from './helpers/loop';
 import audioFiles from './helpers/audioFiles';
 
-import RateSlider from './components/PitchSlider';
+import RateSlider from './components/RateSlider';
+import Track from './components/Track';
 
 let sounds = audioFiles;
 
@@ -97,6 +98,7 @@ class App extends Component {
       <Wrapper>
         <div className="App-header">
           <h2>ZUCCBOI</h2>
+          <Track />
           <RateSlider />
         </div>
 
