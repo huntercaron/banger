@@ -11,7 +11,7 @@ class Buffer {
         request.open('get', url.audio, true);
         request.responseType = 'arraybuffer';
         let thisBuffer = this;
-        
+
         request.onload = function() {
             thisBuffer.context.decodeAudioData(request.response, function(buffer) {
                 thisBuffer.buffer[index] = buffer;

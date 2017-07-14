@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Sound from './helpers/sound';
 import Buffer from './helpers/buffer';
+import Loop from './helpers/loop';
 import audioFiles from './helpers/audioFiles';
+
+import RateSlider from './components/PitchSlider';
 
 let sounds = audioFiles;
 
@@ -11,54 +14,14 @@ const Wrapper = styled.div`
     background-color: pink;
 `
 
-class Loop {
-    constructor(length, sounds = []) {
-        this.sounds = sounds;
-        this.length = length;
-        this.recording = true;
-        this.loops = 1;
-
-        console.log("intit " + this.loops);
-    }
-    //interval for every 4 seconds see what you need to play offset
-
-    startLoop(time) {
-        console.log('loop Started');
-        this.startTime = time;
-        let scope = this;
-        this.interval = window.setInterval(function() { scope.loopRun() }, this.length);
-    }
-
-    stopLoop() {
-        clearInterval(this.interval);
-    }
-
-    makeSounds() {
-        for ( let sound of this.sounds ) {
-            sound.sound.playInTime(sound.time);
-        }
-    }
-
-    loopRun() {
-        this.loops++;
-        console.log("loop: " + this);
-        this.makeSounds();
-    }
-
-    addSound(sound, currentTime) {
-        this.sounds.push({sound: sound, time: ((currentTime - this.startTime) - ((this.length/1000) * this.loops))*-1});
-        console.log(((currentTime - this.startTime) - ((this.length/1000) * this.loops))*-1);
-    }
-}
-
-
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            currentKey: ''
+            currentKey: '',
+            rate: 1
         }
 
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -81,7 +44,11 @@ class App extends Component {
         let context = this.context;
         let buffer = this.buffer;
 
-        let sound = new Sound(this.context, buffer.getSoundByIndex(id));
+        let sound = new Sound(this.context, buffer.getSoundByIndex(id), 1);
+        window.setTimeout(function() {
+          console.log(sound.calcDuration());
+        }, 200)
+
         //this.loop.addSound(sound, context.currentTime);
         //console.log(this.loop);
         //console.log(context.currentTime)
@@ -129,7 +96,8 @@ class App extends Component {
       return (
       <Wrapper>
         <div className="App-header">
-          <h2>hunters meme machine</h2>
+          <h2>ZUCCBOI</h2>
+          <RateSlider />
         </div>
 
 

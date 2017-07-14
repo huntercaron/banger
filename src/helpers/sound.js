@@ -1,8 +1,9 @@
 class Sound {
 
-    constructor(context, buffer) {
+    constructor(context, buffer, rate = 1) {
         this.context = context;
         this.buffer = buffer;
+        this.rate = rate;
     }
 
     init() {
@@ -10,16 +11,23 @@ class Sound {
         this.source = this.context.createBufferSource();
         this.source.buffer = this.buffer;
 
-        this.source.playbackRate.value = 0.12;
-        this.gainNode.gain.value = 1;
+        this.source.playbackRate.value = this.rate;
+        this.gainNode.gain.value = 0.5;
+
+        //console.log(this.source.buffer.length);
 
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.context.destination);
     }
 
+    calcDuration() {
+      return this.source.buffer.duration*this.rate;
+    }
+
     play() {
         this.init();
         this.source.start(this.context.currentTime);
+        console.log(this.source.buffer.duration)
     }
 
     playInTime(time) {
