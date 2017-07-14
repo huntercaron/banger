@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import PitchSlider from '../PitchSlider'
 import MuteButton from '../MuteButton'
 import ClearButton from '../ClearButton'
 import Timeline from '../Timeline'
@@ -33,7 +32,6 @@ class Track extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-            <PitchSlider />
             <MuteButton />
             <ClearButton />
             <Timeline />
