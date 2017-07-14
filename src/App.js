@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Pizzicato from 'pizzicato';
+// import Pizzicato from 'pizzicato';
 import styled from 'styled-components';
 import Sound from './helpers/sound';
 import Buffer from './helpers/buffer';
