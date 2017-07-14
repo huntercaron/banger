@@ -6,12 +6,7 @@ import ClearButton from '../ClearButton'
 import Timeline from '../Timeline'
 
 const Wrapper = styled.div`
-    background-color: teal;
-
-    h1 {
-      font-size: 1.3rem;
-      color: Salmon;
-    }
+    background-color: black;
 `
 
 class Track extends Component {

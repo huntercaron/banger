@@ -41,3 +41,12 @@ class RateSlider extends Component {
 }
 
 export default RateSlider;
+
+
+
+
+
+
+
+
+
