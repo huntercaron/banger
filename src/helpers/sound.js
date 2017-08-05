@@ -21,7 +21,7 @@ class Sound {
     }
 
     calcDuration() {
-      return this.source.buffer.duration*this.rate;
+      return this.source.buffer.duration/this.rate;
     }
 
     play() {

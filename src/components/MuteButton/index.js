@@ -45,7 +45,7 @@ class MuteButton extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-            <h1 className={this.state.muted?'muted':'not_muted'} onClick={this.changeStyle}>TRACK 01</h1>
+            <h1 className={this.state.muted?'muted':'not_muted'} onClick={this.changeStyle}>001</h1>
           </Wrapper>
       )
     }

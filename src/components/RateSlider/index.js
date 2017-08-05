@@ -11,9 +11,9 @@ const Wrapper = styled.div`
 
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      height: 15px; 
-      width: 3px; 
-      background: white;  
+      height: 15px;
+      width: 3px;
+      background: white;
     }
 
     .slider:focus {
@@ -46,7 +46,7 @@ class RateSlider extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-              <Slider onChange={this.handleRateChange} className="slider" type="range" id="range" min="0.1" max="4" step="0.01" defaultValue="1"/>
+              <Slider onChange={this.handleRateChange} className="slider" type="range" id="range" min="0.1" max="3" step="0.01" value={this.props.rate || 1}/>
           </Wrapper>
       )
     }
@@ -54,12 +54,3 @@ class RateSlider extends Component {
 }
 
 export default RateSlider;
-
-
-
-
-
-
-
-
-

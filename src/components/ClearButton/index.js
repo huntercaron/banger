@@ -17,8 +17,8 @@ const Wrapper = styled.div`
     }
 
     .clear_button:hover .shadow {
-      left: 0; 
-      top: 0; 
+      left: 0;
+      top: 0;
     }
 
     .clear {
@@ -29,20 +29,23 @@ const Wrapper = styled.div`
       -webkit-box-shadow: none;
       border: 2px solid white;
       position: absolute;
-      left: 0; 
-      top: 0; 
+      left: 0;
+      top: 0;
       z-index:1;
-      font-family: 'Source Code Pro', monospace;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-family: 'Overpass Mono', monospace;
       outline: none;
     }
 
     .shadow {
+      display: none;
       position: absolute;
       width: 120px;
       height: 50px;
       background: white;
       border: 2px solid white;
-      left: 3px; 
+      left: 3px;
       top: 3px;
       transition: all 0.3s ease;
     }
@@ -72,7 +75,7 @@ class ClearButton extends Component {
             <div className="clear_button">
               <button className="clear" onClick={this.clearMusic}>clear</button>
               <button className="shadow"></button>
-            </div> 
+            </div>
           </Wrapper>
       )
     }
