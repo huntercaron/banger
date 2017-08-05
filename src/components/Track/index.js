@@ -24,7 +24,7 @@ class Track extends Component {
     handleChange(event) {
 
     }
-    
+
     handleRate(rate) {
       this.setState({
         rate: rate
@@ -35,10 +35,9 @@ class Track extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-            <RateSlider onRateChange={function(){}} />
             <MuteButton />
             <ClearButton />
-            <Timeline />
+            <Timeline loop={this.props.loop}/>
           </Wrapper>
       )
     }

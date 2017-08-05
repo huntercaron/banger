@@ -10,6 +10,7 @@ import RateSlider from './components/RateSlider';
 import Track from './components/Track';
 import Timeline from './components/Timeline';
 import RecordButton from './components/RecordButton';
+import NewTrackButton from './components/NewTrackButton';
 
 let sounds = audioFiles;
 
@@ -26,7 +27,8 @@ class App extends Component {
             currentKey: '',
             rate: 1,
             recording: false,
-            activeTrack: 0
+            activeTrack: 0,
+            tracks: [{}]
         }
 
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -34,6 +36,7 @@ class App extends Component {
         this.playTime = this.playTime.bind(this);
         this.handleRate = this.handleRate.bind(this);
         this.handleRecord = this.handleRecord.bind(this);
+        this.handleTrackCreation = this.handleTrackCreation.bind(this);
     }
 
 
@@ -55,15 +58,12 @@ class App extends Component {
         let buffer = this.buffer;
 
         let sound = new Sound(this.context, buffer.getSoundByIndex(id), this.state.rate);
-        window.setTimeout(function() {
-          console.log(sound.calcDuration());
-        }, 200)
 
         if (this.state.recording) {
-          this.loop.addSound(sound, context.currentTime);
+          this.state.tracks[this.state.activeTrack].loop.addSound(sound, context.currentTime);
         }
 
-        //console.log(this.loop);
+        console.log(this.state.tracks[this.state.activeTrack].loop);
         //console.log(context.currentTime)
 
         sound.play();
@@ -81,12 +81,26 @@ class App extends Component {
       });
     }
 
+    handleTrackCreation() {
+      console.log("new TRACK TIME BOIZ");
+
+      console.log(this.state)
+
+      let newTracks = this.state.tracks.slice()
+      newTracks.push({ loop: new Loop(6, [], this.context) })
+
+      this.setState({
+        tracks: newTracks,
+        activeTrack: 1
+      })
+    }
+
 
     handleKeyPress(e) {
         let random = Math.floor(e.keyCode/3);
 
         if (!this.firstSound) {
-          this.loop.startLoop(this.context.currentTime);
+          this.state.tracks[this.state.activeTrack].loop.startLoop(this.context.currentTime);
           this.firstSound = true;
         }
 
@@ -138,8 +152,7 @@ class App extends Component {
     componentDidMount() {
         this.context = new (window.AudioContext || window.webkitAudioContext)();
         document.addEventListener('keydown', this.handleKeyPress);
-        this.loop = new Loop(6, [], this.context);
-        console.log("currentTime" + this.context.currentTime);
+        this.state.tracks[0].loop = new Loop(6, [], this.context);
 
         this.buffer = new Buffer(this.context, sounds);
         this.buffer.loadAll();
@@ -154,7 +167,15 @@ class App extends Component {
       <Wrapper>
         <div className="App-header">
           <RecordButton onRecordChange={this.handleRecord} recording={this.state.recording}/>
-          <Track />
+
+          <NewTrackButton onNewTrack={this.handleTrackCreation}/>
+
+          {this.state.tracks[0].loop ? (
+            this.state.tracks.map((track, i) => {
+              return <Track loop={track.loop} key={i}/>  })
+              ) : (
+            <div>Hit a Key...</div>
+          )}
           <RateSlider onRateChange={this.handleRate} rate={this.state.rate}/>
             {/* {this.loop ? (
               this.props.studios.map((studio, i) => {
@@ -163,8 +184,8 @@ class App extends Component {
                     ) : (
               <div>Loading...</div>
             )} */}
-            {this.loop ? (
-              <Timeline loop={this.loop}/>
+            {this.state.tracks[0].loop ? (
+              <Timeline loop={this.state.tracks[this.state.activeTrack].loop}/>
                     ) : (
               <div>Loading...</div>
             )}
