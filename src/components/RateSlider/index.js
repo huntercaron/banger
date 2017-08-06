@@ -9,10 +9,18 @@ const Wrapper = styled.div`
       color: pink;
     }
 
+    padding: 20px 0;
+
+    .slider {
+      width: 100%;
+    }
+
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      height: 15px;
-      width: 3px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid black;
+      width: 25px;
       background: white;
     }
 

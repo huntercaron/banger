@@ -9,8 +9,26 @@ const Wrapper = styled.div`
       color: pink;
     }
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border: 2px solid pink;
     height: 40px;
+
+    &:hover {
+      font-style: italic;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: pink;
+      h1 {
+        color: black;
+      }
+    }
+
+
 `
 
 class NewTrackButton extends Component {

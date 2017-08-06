@@ -6,13 +6,13 @@ class Sound {
         this.rate = rate;
     }
 
-    init() {
+    init(volume = 0.5) {
         this.gainNode = this.context.createGain();
         this.source = this.context.createBufferSource();
         this.source.buffer = this.buffer;
 
         this.source.playbackRate.value = this.rate;
-        this.gainNode.gain.value = 0.5;
+        this.gainNode.gain.value = volume;
 
         //console.log(this.source.buffer.length);
 
@@ -30,8 +30,14 @@ class Sound {
         console.log(this.source.buffer.duration)
     }
 
-    playInTime(time) {
-        this.init();
+    stop() {
+      this.source.stop();
+    }
+
+    playInTime(time, volume = 0.5) {
+      console.log("VOLUME " + volume )
+
+        this.init(volume);
         this.source.start(this.context.currentTime + time);
     }
 

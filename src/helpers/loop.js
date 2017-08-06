@@ -1,17 +1,20 @@
 class Loop {
-    constructor(length, sounds = [], context) {
-        this.sounds = sounds;
+    constructor(length, context) {
         this.length = length;
         this.recording = true;
         this.loops = 0;
         this.context = context;
         this.looping = true;
         this.loopStarting = false;
+        this.tracks = [
+          {
+            sounds: [],
+            number: 0,
+            isMuted: false,
+            volume: 0.5
+          }
+        ];
 
-        this.loopEvent = new Event('newLoop');
-
-
-        console.log("intit " + this.loops);
         this.playLoopSound = this.playLoopSound.bind(this);
     }
     //interval for every 4 seconds see what you need to play offset
@@ -19,8 +22,7 @@ class Loop {
     startLoop(time) {
         console.log('loop Started');
         this.startTime = time;
-        let scope = this;
-        //this.interval = window.setInterval(function() { scope.loopRun() }, this.length);
+
         this.playLoopSound()
     }
 
@@ -51,29 +53,51 @@ class Loop {
         clearInterval(this.interval);
     }
 
-    makeSounds() {
-        for ( let sound of this.sounds ) {
-            sound.sound.playInTime(sound.time);
+    makeSounds(track) {
+      if (track.isMuted == false) {
+        for ( let sound of track.sounds ) {
+            sound.sound.playInTime(sound.time, track.volume);
         }
+      }
     }
 
     loopRun() {
         this.loops++;
-        console.log(this.loops)
-        //console.log("looop: " + this.sounds);
-        this.loopStarting = false;
-        this.makeSounds();
-        //this.dispatchEvent(this.loopEvent);
 
-        if (this.sounds.length != 0 && this.context.currentTime % 4 == 0)
-          console.log("SHEOSTNROISTENRSIOTENS")
+        this.loopStarting = false;
+
+        for (let track of this.tracks)
+          this.makeSounds(track);
 
     }
 
-    addSound(sound, currentTime) {
-        this.sounds.push({sound: sound, time: ( (currentTime - this.startTime) - (this.length * this.loops)  )});
-        console.log(sound)
+    addSound(sound, currentTime, track) {
+        this.tracks[track].sounds.push({sound: sound, time: ( (currentTime - this.startTime) - (this.length * this.loops)  )});
+
         //console.log(((currentTime - this.startTime) - ((this.length/1000) * this.loops))*-1);
+    }
+
+
+
+
+    muteTrack(track) {
+      for (let sound of track.sounds) {
+        sound.sound.stop();
+      }
+      track.isMuted = true;
+    }
+
+    
+
+    unMuteTrack(track) {
+      for (let sound of track.sounds) {
+        if (sound.time - (this.context.currentTime % this.length) >= 0) {
+          sound.sound.playInTime(sound.time-(this.context.currentTime % this.length), track.volume);
+        }
+      }
+
+      console.log(this.context.currentTime % this.length)
+      track.isMuted = false;
     }
 }
 

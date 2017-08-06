@@ -8,6 +8,7 @@ import RateSlider from '../RateSlider'
 
 const Wrapper = styled.div`
     background-color: black;
+    display: flex;
 `
 
 class Track extends Component {
@@ -35,9 +36,9 @@ class Track extends Component {
     render() {
       return (
           <Wrapper {...this.props}>
-            <MuteButton />
-            <ClearButton />
-            <Timeline loop={this.props.loop}/>
+            <MuteButton track={this.props.track} loop={this.props.loop}/>
+            {/* <ClearButton /> */}
+            <Timeline track={this.props.track} loop={this.props.loop}/>
           </Wrapper>
       )
     }

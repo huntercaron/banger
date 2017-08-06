@@ -26,26 +26,23 @@ class MuteButton extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-          muted: false
-        }
-
-        // this.handleChange = this.handleChange.bind(this);
-        this.changeStyle = this.changeStyle.bind(this);
+        this.handleMuteChange = this.handleMuteChange.bind(this);
     }
 
-    changeStyle() {
-      if (this.state.muted == false) {
-        this.setState({muted: true})
+    handleMuteChange() {
+      if (!this.props.track.isMuted) {
+        this.props.loop.muteTrack(this.props.track);
       } else {
-        this.setState({muted: false})
+        this.props.loop.unMuteTrack(this.props.track);
       }
+
+      this.forceUpdate()
     }
 
     render() {
       return (
           <Wrapper {...this.props}>
-            <h1 className={this.state.muted?'muted':'not_muted'} onClick={this.changeStyle}>001</h1>
+            <h1 className={this.props.track.isMuted?'muted':'not_muted'} onClick={this.handleMuteChange}>{this.props.track.number}</h1>
           </Wrapper>
       )
     }
