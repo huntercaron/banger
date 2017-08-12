@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 const Record = styled.button`
   background-color: red;
-  width: 80%;
+  width: 100%;
   border: none;
   outline: none;
 
@@ -20,7 +20,7 @@ const Record = styled.button`
 `
 
 const Spacer = styled.div`
-  width: 20%;
+  width: 0%;
 `
 
 class RecordButton extends Component {

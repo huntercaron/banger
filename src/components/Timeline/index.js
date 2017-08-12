@@ -77,9 +77,11 @@ class Timeline extends Component {
                   right: window.innerWidth-((window.innerWidth*sound.time*1000)/(this.props.loop.length*1000))-sound.sound.calcDuration()*80,
                   width: sound.sound.calcDuration()*80,
                   height: "20px",
+                  transform: `rotateX(${(sound.sound.rate*35)-45}deg)`,
                   top: 100-(sound.sound.rate*35) + "px"
                   //borderWidth: 5-sound.sound.rate
                 };
+                //console.log(sound.sound.rate*35);
                 return <Note key={i} style={noteStyle}></Note>;
               }) ) : (
               <div>Loading...</div>

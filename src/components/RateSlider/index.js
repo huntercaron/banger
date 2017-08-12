@@ -18,7 +18,7 @@ const Wrapper = styled.div`
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       height: 25px;
-      border-radius: 50%;
+
       border: 2px solid black;
       width: 25px;
       background: white;

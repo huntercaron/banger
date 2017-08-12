@@ -10,7 +10,7 @@ class Loop {
           {
             sounds: [],
             number: 0,
-            isMuted: false,
+            isMuted: true,
             volume: 0.5
           }
         ];
@@ -87,7 +87,7 @@ class Loop {
       track.isMuted = true;
     }
 
-    
+
 
     unMuteTrack(track) {
       for (let sound of track.sounds) {
