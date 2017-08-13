@@ -16,6 +16,8 @@ class Sound {
 
         //console.log(this.source.buffer.length);
 
+        console.log(this.context.destination)
+
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.context.destination);
     }

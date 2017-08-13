@@ -27,7 +27,7 @@ class App extends Component {
         this.state = {
             currentKey: '',
             rate: 1,
-            recording: true,
+            recording: false,
             activeTrack: 0,
             loop: {},
         }
@@ -37,6 +37,7 @@ class App extends Component {
         this.handleRate = this.handleRate.bind(this);
         this.handleRecord = this.handleRecord.bind(this);
         this.handleTrackCreation = this.handleTrackCreation.bind(this);
+        this.isKeycode = this.isKeycode.bind(this);
     }
 
     playSound(id = 0) {
@@ -86,14 +87,23 @@ class App extends Component {
       this.state.loop.muteTrack(track);
     }
 
+    isKeycode(keycode) {
+      return function(sound) {
+        return sound.keybind === keycode;
+      }
+    }
+
 
     handleKeyPress(e) {
-        let random = Math.floor(e.keyCode/3);
 
-        if (random <= 39 && !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode !== 13) {
-            console.log(random);
-            this.playSound(random);
-            console.log('this sound is ' + sounds[random].name)
+        if (!(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode !== 13) {
+          let soundBind = audioFiles.findIndex( this.isKeycode(e.keyCode));
+
+          if (soundBind > -1) {
+            this.playSound(soundBind);
+            console.log('this sound is ' + sounds[soundBind].name)
+          }
+
         }
 
         this.setState({currentKey: e.keyCode});
@@ -102,14 +112,14 @@ class App extends Component {
         if (e.keyCode === 38) {
           e.preventDefault();
             this.setState({
-              rate: this.state.rate + 0.05
+              rate: this.state.rate + 0.02
             })
         }
 
         if (e.keyCode === 40) {
           e.preventDefault();
           this.setState({
-            rate: this.state.rate - 0.05
+            rate: this.state.rate - 0.02
           })
         }
 
@@ -146,12 +156,13 @@ class App extends Component {
           loop: new Loop(6, this.context)
         })
 
+        this.context.createMediaStreamDestination();
+
         let scope = this;
 
         setTimeout(function(){
           scope.state.loop.startLoop(scope.context.currentTime);
         }, 10);
-
 
         this.buffer = new Buffer(this.context, sounds);
         this.buffer.loadAll();

@@ -18,7 +18,7 @@ const Note = styled.div`
   border: 1px solid white;
   opacity: 1;
   color: white;
-  height: 100px;
+  height: 10px;
   font-size: 1.1rem;
   position: absolute;
   writing-mode: vertical-lr;
@@ -78,7 +78,7 @@ class Timeline extends Component {
                   width: sound.sound.calcDuration()*80,
                   height: "20px",
                   transform: `rotateX(${(sound.sound.rate*35)-45}deg)`,
-                  top: 100-(sound.sound.rate*35) + "px"
+                  top: 76-(sound.sound.rate*35) + "px"
                   //borderWidth: 5-sound.sound.rate
                 };
                 //console.log(sound.sound.rate*35);

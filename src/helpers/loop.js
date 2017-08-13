@@ -10,7 +10,7 @@ class Loop {
           {
             sounds: [],
             number: 0,
-            isMuted: true,
+            isMuted: false,
             volume: 0.5
           }
         ];
