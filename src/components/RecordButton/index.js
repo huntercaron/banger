@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Logo from '../../logo.svg'
 
 const Wrapper = styled.div`
     display: flex;
@@ -38,7 +39,8 @@ class RecordButton extends Component {
       return (
           <Wrapper {...this.props}>
               <Spacer />
-              <Record onClick={this.handleRecordChange} className={this.props.recording ? "" : "inactive"}/>
+              <Record onClick={this.handleRecordChange} className={this.props.recording ? "" : "inactive"}>
+              </Record>
           </Wrapper>
       )
     }
